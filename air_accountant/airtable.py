@@ -34,3 +34,61 @@ def get_all_accounts():
         for acc in result
     ]
     return accounts
+
+
+def record_transaction(date, description, amount, account_number, type):
+    """
+    Record a transaction to the Transactions table.
+    """
+    api = create_api_connection()
+    base_id = os.getenv("AIRTABLE_BASE_ID")
+    table_name = os.getenv("TRANSACTIONS_TABLE_ID")
+    transactions_table = api.table(base_id=base_id, table_name=table_name)
+    tx_result = transactions_table.create(
+        {
+            "date": date,
+            "description": description,
+            "amount": amount,
+            "account": account_number,
+            "type": type,
+        }
+    )
+    return tx_result
+
+
+def record_bulk_transaction(transactions):
+    """
+    Record a list of transactions to the Transactions table.
+    """
+    api = create_api_connection()
+    base_id = os.getenv("AIRTABLE_BASE_ID")
+    table_name = os.getenv("TRANSACTIONS_TABLE_ID")
+    transactions_table = api.table(base_id=base_id, table_name=table_name)
+    tx_result = transactions_table.batch_create(transactions)
+    return tx_result
+
+
+def record_journal_entry(name, date, transactions):
+    """
+    Record a journal entry to the Journal Entries table.
+    """
+    api = create_api_connection()
+    base_id = os.getenv("AIRTABLE_BASE_ID")
+    table_name = os.getenv("JOURNALS_TABLE_ID")
+    journal_entries_table = api.table(base_id=base_id, table_name=table_name)
+    je_result = journal_entries_table.create(
+        {"name": name, "date": date, "transactions": transactions}
+    )
+    return je_result
+
+
+def record_bulk_journal_entry(journal_entries):
+    """
+    Record a list of journal entries to the Journal Entries table.
+    """
+    api = create_api_connection()
+    base_id = os.getenv("AIRTABLE_BASE_ID")
+    table_name = os.getenv("JOURNALS_TABLE_ID")
+    journal_entries_table = api.table(base_id=base_id, table_name=table_name)
+    je_result = journal_entries_table.batch_create(journal_entries)
+    return je_result
