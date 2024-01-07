@@ -1,14 +1,17 @@
 [tool.poetry]
-name = "air-accountant"
+name = "air_accountant"
 version = "0.1.0"
 description = "An AI assistant for accounting using Airtable as database."
 authors = ["deejungx <dipzz1394@gmail.com>"]
 readme = "README.md"
+packages = [{include = "air_accountant"}]
 
 [tool.poetry.dependencies]
 python = "^3.12"
 pyairtable = "^2.2.1"
 python-dotenv = "^1.0.0"
+pydantic = "^2.5.3"
+openai = "^1.6.1"
 
 
 [build-system]
