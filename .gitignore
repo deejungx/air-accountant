@@ -1,2 +1,4 @@
 .env
 OAI_CONFIG_LIST
+air_accountant/__pycache__/airtable.cpython-311.pyc
+.cache/41/cache.db
