@@ -8,6 +8,8 @@ from pyairtable import Api
 load_dotenv()  # load environment variables from .env file
 logger = logging.getLogger(__name__)
 
+logger.setLevel(logging.DEBUG)
+
 
 def create_api_connection():
     """
